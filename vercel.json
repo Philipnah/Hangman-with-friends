@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/game/:code*",
-      "destination": "https://hangmanwithfriends.vercel.app/game/:code*"
+      "source": "/(*.)",
+      "destination": "/"
     }
   ]
 }
