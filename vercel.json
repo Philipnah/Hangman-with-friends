@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/game/*",
-      "destination": "/joingame"
+      "destination": "https://hangmanwithfriends.vercel.app/joingame"
     }
   ]
 }
