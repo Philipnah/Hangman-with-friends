@@ -100,9 +100,14 @@ export default function Game() {
 		return chars.map((character, index) => { return <CharacterBox character={character} key={index} guessed={true} /> })
 	}
 
+	function incorrectGuesses() {
+		incorrectGuesses = guesses.map((guess) => { if (!chars.includes(guess)) return guess })
+		incorrectGuesses.sort();
+		return incorrectGuesses.map((guess, index) => { if (guess) return <li key={index} className="text-red-500 mx-2">{guess}</li> })
+	}
 
 	return (
-		<div className="text-white m-4">
+		<div className="text-white mx-4 my-16">
 			<p className="text-center m-4">Can you guess {name}'s {word.length}-letter word?</p>
 			<ol className="flex flex-wrap justify-center">
 				{gameOver ? revealWord() : createCharBoxes()}
@@ -116,13 +121,13 @@ export default function Game() {
 						<div className="bg-slate-800 opacity-75 rounded-md p-2 my-4">
 							<p className="mx-2 text-center">Incorrect guesses</p>
 							<ol className="flex flex-wrap justify-center">
-								{guesses.map((guess, index) => { if (!chars.includes(guess)) return <li key={index} className="text-red-500 mx-2">{guess}</li> })}
+								{ incorrectGuesses() }
 							</ol>
 						</div>
 					}
 					{/*// todo: only allow letters to be guessed*/ }
 					<input onChange={(event) => handleOnChange(event)} onKeyDown={(e) => { if (e.key == 'Enter') handleOnClick() }} id="input" type="text" className="bg-slate-700 w-full rounded-md px-3 py-2 my-2" />
-					<button onClick={() => handleOnClick()} className="py-2 my-4 w-full transition duration-300 rounded-md outline outline-2 outline-slate-500 hover:outline-none hover:bg-gray-700 hover:shadow-md">Guess</button>
+					<button onClick={() => handleOnClick()} className="py-2 my-4 w-full transition duration-300 rounded-md outline outline-2 outline-gray-500 hover:outline-none hover:bg-gray-700 hover:shadow-md">Guess</button>
 				</>
 			}
 			{gameOver &&
